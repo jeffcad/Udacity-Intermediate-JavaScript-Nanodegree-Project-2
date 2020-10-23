@@ -18,8 +18,34 @@ main {
   padding: 20px;
 }
 
+.rover-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rover-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #BC2732;
+  opacity: 0.5;
+  width: 300px;
+  height: 300px;
+  margin: 30px;
+  text-align: center;
+  border: 2px solid;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.rover-card:hover {
+  opacity: 1;
+  color: white;
+}
+
 footer {
-  /* footer styles */
+  text-align: center;
 }
 
 /* -------------------  TABLET  --------------------- */

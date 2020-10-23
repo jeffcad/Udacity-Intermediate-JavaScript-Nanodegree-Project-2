@@ -1,6 +1,8 @@
 let store = {
     user: { name: "Student" },
     apod: '',
+    selectedRover: 'curiosity',
+    data: '',
     rovers: ['Curiosity', 'Opportunity', 'Spirit'],
 }
 
@@ -19,27 +21,23 @@ const render = async (root, state) => {
 
 // create content
 const App = (state) => {
-    let { rovers, apod } = state
+    // let { apod } = state
 
     return `
         <header></header>
         <main>
-            ${Greeting(store.user.name)}
             <section>
-                <h3>Put things on the page!</h3>
-                <p>Here is an example section.</p>
-                <p>
-                    One of the most popular websites at NASA is the Astronomy Picture of the Day. In fact, this website is one of
-                    the most popular websites across all federal agencies. It has the popular appeal of a Justin Bieber video.
-                    This endpoint structures the APOD imagery and associated metadata so that it can be repurposed for other
-                    applications. In addition, if the concept_tags parameter is set to True, then keywords derived from the image
-                    explanation are returned. These keywords could be used as auto-generated hashtags for twitter or instagram feeds;
-                    but generally help with discoverability of relevant imagery.
-                </p>
-                ${ImageOfTheDay(apod)}
+                <div class="rover-container">
+                    <div class="rover-card"><h2>Spirit</h2></div>
+                    <div class="rover-card"><h2>Opportunity</h2></div>
+                    <div class="rover-card"><h2>Curiosity</h2></div>
+                </div>
+                ${RoverData(state)}
             </section>
         </main>
-        <footer></footer>
+        <footer>
+            <h3>A project for Udacity's Intermediate JavaScript Nanodegree</h3>
+        </footer>
     `
 }
 
@@ -72,7 +70,7 @@ const ImageOfTheDay = (apod) => {
     console.log(photodate.getDate(), today.getDate());
 
     console.log(photodate.getDate() === today.getDate());
-    if (!apod || apod.date === today.getDate() ) {
+    if (!apod || apod.date === today.getDate()) {
         getImageOfTheDay(store)
     }
 
@@ -91,6 +89,20 @@ const ImageOfTheDay = (apod) => {
     }
 }
 
+const RoverData = () => {
+    if (!store.data) {
+        console.log('Getting API data')
+        getRoverData(store)
+    }
+
+    console.log('Data: ', store.data)
+    return (`
+    <p>${store.data.results.photos[0].rover.name}</p>
+    `)
+}
+
+
+
 // ------------------------------------------------------  API CALLS
 
 // Example API call
@@ -102,4 +114,12 @@ const getImageOfTheDay = (state) => {
         .then(apod => updateStore(store, { apod }))
 
     return data
+}
+
+const getRoverData = (state) => {
+    const { selectedRover } = state
+
+    fetch(`http://localhost:3000/${selectedRover}`)
+        .then(res => res.json())
+        .then(data => updateStore(store, { data }))
 }
