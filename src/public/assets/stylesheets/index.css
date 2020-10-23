@@ -9,8 +9,6 @@ h3 {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
   font-family: Arial;
   min-height: 100vh;
 }
@@ -51,10 +49,6 @@ main {
   color: white;
   outline: none;
   border: 5px solid black;
-}
-
-.rover-card:focus {
-  
 }
 
 footer {

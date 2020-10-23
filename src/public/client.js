@@ -67,8 +67,16 @@ const RoverData = (state) => {
     }
 
     console.log('Data: ', state.data)
+    const { photos } = state.data.results
+    const { name, launch_date, landing_date, status } =
+        state.data.results.photos[0].rover
+
     return (`
-        <p>${state.data.results.photos[0].rover.name}</p>
+        <p>Rover name: ${name}</p>
+        <p>Launched from Earth on: ${launch_date}</p>
+        <p>Landed on Mars on: ${landing_date}</p>
+        <p>Mission status: ${status}</p>
+        <p># of photos: ${photos.length}</p>
         <button onclick="updateStore(store, {selectedRover: '', data: ''})">
             Back
         </button>
