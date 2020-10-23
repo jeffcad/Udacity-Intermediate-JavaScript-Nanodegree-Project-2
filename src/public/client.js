@@ -79,6 +79,9 @@ const RoverData = (state) => {
         <p>Landed on Mars on: ${landing_date}</p>
         <p>Mission status: ${status}</p>
         <p>Photos taken on Mars on Earth date: ${photoDate}
+        <button onclick="updateStore(store, {selectedRover: '', data: ''})">
+            Back
+        </button>
         <div class="photo-container">
             ${photoURL.map(url => `<img class="photo" src="${url}" alt="Photo taken on Mars by ${name}"/>`)}
         </div>

@@ -13,6 +13,13 @@ body {
   min-height: 100vh;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  min-height: 100vh;
+}
+
 header {
   text-align: center;
 }
@@ -50,7 +57,6 @@ main {
   opacity: 1;
   color: white;
   outline: none;
-  border: 5px solid black;
 }
 
 .photo-container {
