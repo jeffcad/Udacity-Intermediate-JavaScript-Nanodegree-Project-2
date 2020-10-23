@@ -68,8 +68,8 @@ const RoverData = (state) => {
 
     console.log('Data: ', state.data)
     return (`
-        <p>${store.data.results.photos[0].rover.name}</p>
-        <button onclick="updateStore(store, {selectedRover: ''})">
+        <p>${state.data.results.photos[0].rover.name}</p>
+        <button onclick="updateStore(store, {selectedRover: '', data: ''})">
             Back
         </button>
     `)
