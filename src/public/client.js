@@ -3,7 +3,7 @@ let store = {
     apod: '',
     selectedRover: 'curiosity',
     data: '',
-    rovers: ['Curiosity', 'Opportunity', 'Spirit'],
+    rovers: ['Spirit', 'Opportunity', 'Curiosity'],
 }
 
 // add our markup to the page
@@ -24,13 +24,13 @@ const App = (state) => {
     // let { apod } = state
 
     return `
-        <header></header>
+        <header><h1>Mars Rover Dashboard</h1></header>
         <main>
             <section>
                 <div class="rover-container">
-                    <div class="rover-card"><h2>Spirit</h2></div>
-                    <div class="rover-card"><h2>Opportunity</h2></div>
-                    <div class="rover-card"><h2>Curiosity</h2></div>
+                    <div class="rover-card"><h2>${store.rovers[0]}</h2></div>
+                    <div class="rover-card"><h2>${store.rovers[1]}</h2></div>
+                    <div class="rover-card"><h2>${store.rovers[2]}</h2></div>
                 </div>
                 ${RoverData(state)}
             </section>
