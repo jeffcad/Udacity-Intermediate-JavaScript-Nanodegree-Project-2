@@ -75,30 +75,33 @@ window.addEventListener('load', () => {
 const RoverData = (state) => {
 
     if (!state.selectedRover) {
-        return `
+        return (`
             <div class="rover-container">
                 <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[0]}'})">
-                    <h2>${store.rovers[0]}</h2>
+                    <h2>${state.rovers[0]}</h2>
                 </div>
                 <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[1]}'})">
-                    <h2>${store.rovers[1]}</h2>
+                    <h2>${state.rovers[1]}</h2>
                 </div>
                 <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[2]}'})">
-                    <h2>${store.rovers[2]}</h2>
+                    <h2>${state.rovers[2]}</h2>
                 </div>
             </div >
-        `
+        `)
     }
 
-    if (!store.data) {
+    if (!state.data) {
         console.log(`Getting API data for ${state.selectedRover}`)
-        getRoverData(store)
+        getRoverData(state)
         return ""
     }
 
-    console.log('Data: ', store.data)
+    console.log('Data: ', state.data)
     return (`
-    <p>${store.data.results.photos[0].rover.name}</p>
+        <p>${store.data.results.photos[0].rover.name}</p>
+        <button onclick="updateStore(store, {selectedRover: ''})">
+            Back
+        </button>
     `)
 }
 
@@ -111,5 +114,5 @@ const getRoverData = (state) => {
 
     fetch(`http://localhost:3000/${selectedRover}`)
         .then(res => res.json())
-        .then(data => updateStore(store, { data }))
+        .then(data => updateStore(state, { data }))
 }
