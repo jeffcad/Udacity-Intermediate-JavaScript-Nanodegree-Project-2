@@ -2,7 +2,7 @@ let store = {
     user: { name: "Student" },
     selectedRover: '',
     data: '',
-    rovers: ['Spirit', 'Opportunity', 'Curiosity'],
+    rovers: Immutable.List(['Spirit', 'Opportunity', 'Curiosity']),
 }
 
 // add our markup to the page
@@ -47,14 +47,14 @@ const RoverData = (state) => {
     if (!state.selectedRover) {
         return (`
             <div class="rover-container">
-                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[0]}'})" tabindex="0">
-                    <h2>${state.rovers[0]}</h2>
+                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers.get(0)}'})" tabindex="0">
+                    <h2>${state.rovers.get(0)}</h2>
                 </div>
-                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[1]}'})" tabindex="0">
-                    <h2>${state.rovers[1]}</h2>
+                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers.get(1)}'})" tabindex="0">
+                    <h2>${state.rovers.get(1)}</h2>
                 </div>
-                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[2]}'})" tabindex="0">
-                    <h2>${state.rovers[2]}</h2>
+                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers.get(2)}'})" tabindex="0">
+                    <h2>${state.rovers.get(2)}</h2>
                 </div>
             </div >
         `)
