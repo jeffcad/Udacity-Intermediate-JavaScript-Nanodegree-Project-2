@@ -56,17 +56,32 @@ footer {
 
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
-  /* use mobile */
+  .rover-card {
+    width: 500px;
+    height: 500px
+  }
 }
 
 /* -------------------  DESKTOP  -------------------- */
 
 @media (min-width: 1224px) {
-  /* use mobile */
+  .rover-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .rover-card {
+    width: 320px;
+    height: 320px;
+  }
+
 }
 
 /* -------------------  LARGE SCREENS  -------------- */
 
 @media (min-width: 1824px) {
-  /* use mobile */
+  .rover-card {
+    width: 500px;
+    height: 500px;
+  }
 }

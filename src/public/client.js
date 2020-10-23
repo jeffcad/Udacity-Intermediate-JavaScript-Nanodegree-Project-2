@@ -1,7 +1,7 @@
 let store = {
     user: { name: "Student" },
     apod: '',
-    selectedRover: 'Curiosity',
+    selectedRover: '',
     data: '',
     rovers: ['Spirit', 'Opportunity', 'Curiosity'],
 }
@@ -28,11 +28,6 @@ const App = (state) => {
         <header><h1>Mars Rover Dashboard</h1></header>
         <main>
             <section>
-                <div class="rover-container">
-                    <div class="rover-card"><h2>${store.rovers[0]}</h2></div>
-                    <div class="rover-card"><h2>${store.rovers[1]}</h2></div>
-                    <div class="rover-card"><h2>${store.rovers[2]}</h2></div>
-                </div>
                 ${RoverData(state)}
             </section>
         </main>
@@ -80,7 +75,13 @@ window.addEventListener('load', () => {
 const RoverData = (state) => {
 
     if (!state.selectedRover) {
-        return ""
+        return `
+            <div class="rover-container">
+                <div class="rover-card"><h2>${store.rovers[0]}</h2></div>
+                <div class="rover-card"><h2>${store.rovers[1]}</h2></div>
+                <div class="rover-card"><h2>${store.rovers[2]}</h2></div>
+            </div >
+        `
     }
 
     if (!store.data) {
@@ -88,6 +89,7 @@ const RoverData = (state) => {
         console.log('Before getRoverData')
         getRoverData(store)
         console.log('After getRoverData')
+        return ""
     }
 
     console.log('Data: ', store.data)
