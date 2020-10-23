@@ -45,8 +45,8 @@ const RoverData = (state) => {
     if (!state.selectedRover) {
         return (`
             <div class="rover-container">
-                ${store.rovers.map(rover => `<button class="rover-card" onclick="updateStore(store, {selectedRover: '${rover}'})">
-                <h2 class="card-title">${rover}</h2></button>`).join('')}
+                ${store.rovers.map(rover => buttonMaker(rover, 'rover-card'))
+                .join('')}
             </div >
         `)
     }
@@ -79,6 +79,15 @@ const RoverData = (state) => {
         <button onclick="updateStore(store, {selectedRover: '', data: ''})">
             Back
         </button>
+    `)
+}
+
+const buttonMaker = (rover, htmlClass) => {
+    return (`
+    <button class="${htmlClass}"
+    onclick="updateStore(store, {selectedRover: '${rover}'})">
+    <h2 class="card-title">${rover}</h2>
+    </button>
     `)
 }
 
