@@ -67,11 +67,11 @@ const RoverData = (state) => {
     }
 
     console.log('Data: ', state.data)
-    const { photos } = state.data.results
-    const photoURL = photos.map(photo => photo.img_src)
-    const photoDate = state.data.results.photos[0].earth_date
+    const { latest_photos } = state.data.results
+    const photoURL = latest_photos.map(photo => photo.img_src)
+    const photoDate = state.data.results.latest_photos[0].earth_date
     const { name, launch_date, landing_date, status } =
-        state.data.results.photos[0].rover
+        state.data.results.latest_photos[0].rover
 
     return (`
         <p>Rover name: ${name}</p>
