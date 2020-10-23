@@ -43,12 +43,7 @@ window.addEventListener('load', () => {
 const RoverData = (state) => {
 
     if (!state.selectedRover) {
-        return (`
-            <div class="rover-container">
-                ${store.rovers.map(rover => buttonMaker(rover, 'rover-card'))
-                .join('')}
-            </div >
-        `)
+        return (`${wrapInDiv(buttonMaker, 'rover-card', 'rover-container')}`)
     }
 
     if (!state.data) {
@@ -82,12 +77,21 @@ const RoverData = (state) => {
     `)
 }
 
-const buttonMaker = (rover, htmlClass) => {
+const buttonMaker = (rover, buttonClass) => {
     return (`
-    <button class="${htmlClass}"
+    <button class="${buttonClass}"
     onclick="updateStore(store, {selectedRover: '${rover}'})">
     <h2 class="card-title">${rover}</h2>
     </button>
+    `)
+}
+
+const wrapInDiv = (callback, callbackClass, divClass) => {
+    return (`
+    <div class="${divClass}">
+        ${store.rovers.map(rover => callback(rover, callbackClass))
+            .join('')}
+    </div >
     `)
 }
 
