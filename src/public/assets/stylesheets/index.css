@@ -8,6 +8,18 @@ h3 {
   font-weight: bold;
 }
 
+h1 {
+  font-size: 5rem;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
 body {
   font-family: Arial;
   min-height: 100vh;
@@ -47,7 +59,6 @@ main {
   height: 300px;
   margin: 30px;
   text-align: center;
-  border: 2px solid;
   border-radius: 20px;
   cursor: pointer;
 }
@@ -57,6 +68,10 @@ main {
   opacity: 1;
   color: white;
   outline: none;
+}
+
+.card-title {
+  margin: auto;
 }
 
 .photo-container {
