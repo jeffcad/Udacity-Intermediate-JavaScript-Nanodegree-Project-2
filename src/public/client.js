@@ -1,5 +1,4 @@
 let store = {
-    user: { name: "Student" },
     selectedRover: '',
     data: '',
     rovers: Immutable.List(['Spirit', 'Opportunity', 'Curiosity']),
@@ -17,7 +16,6 @@ const updateStore = (store, newState) => {
 const render = async (root, state) => {
     root.innerHTML = App(state)
 }
-
 
 // create content
 const App = (state) => {
@@ -83,15 +81,13 @@ const RoverData = (state) => {
             Back
         </button>
         <div class="photo-container">
-            ${photoURL.map(url => `<img class="photo" src="${url}" alt="Photo taken on Mars by ${name}"/>`)}
+            ${photoURL.map(url => `<img class="photo" src="${url}" alt="Photo taken on Mars by ${name}"/>`).join('')}
         </div>
         <button onclick="updateStore(store, {selectedRover: '', data: ''})">
             Back
         </button>
     `)
 }
-
-
 
 // ------------------------------------------------------  API CALLS
 
