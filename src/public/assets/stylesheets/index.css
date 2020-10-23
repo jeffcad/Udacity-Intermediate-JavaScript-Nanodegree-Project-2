@@ -51,6 +51,17 @@ main {
   border: 5px solid black;
 }
 
+.photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.photo {
+  width: 80%;
+}
+
 footer {
   text-align: center;
 }
@@ -60,6 +71,17 @@ footer {
   .rover-card {
     width: 500px;
     height: 500px
+  }
+
+  .photo-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .photo {
+    width: 40%;
+    margin: 20px;
   }
 }
 
@@ -76,6 +98,17 @@ footer {
     height: 320px;
   }
 
+  .photo-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .photo {
+    width: 25%;
+    margin: 40px;
+  }
+
 }
 
 /* -------------------  LARGE SCREENS  -------------- */
@@ -84,5 +117,16 @@ footer {
   .rover-card {
     width: 500px;
     height: 500px;
+  }
+
+  .photo-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .photo {
+    width: 20%;
+    margin: 40px;
   }
 }

@@ -68,6 +68,8 @@ const RoverData = (state) => {
 
     console.log('Data: ', state.data)
     const { photos } = state.data.results
+    const photoURL = photos.map(photo => photo.img_src)
+    const photoDate = state.data.results.photos[0].earth_date
     const { name, launch_date, landing_date, status } =
         state.data.results.photos[0].rover
 
@@ -76,7 +78,10 @@ const RoverData = (state) => {
         <p>Launched from Earth on: ${launch_date}</p>
         <p>Landed on Mars on: ${landing_date}</p>
         <p>Mission status: ${status}</p>
-        <p># of photos: ${photos.length}</p>
+        <p>Photos taken on Mars on Earth date: ${photoDate}
+        <div class="photo-container">
+            ${photoURL.map(url => `<img class="photo" src="${url}" alt="Photo taken on Mars by ${name}"/>`)}
+        </div>
         <button onclick="updateStore(store, {selectedRover: '', data: ''})">
             Back
         </button>

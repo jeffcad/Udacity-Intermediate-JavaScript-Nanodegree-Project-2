@@ -33,7 +33,7 @@ app.get('/:name', async (req, res) => {
 
     let date;
     if (name === 'spirit') {
-        date = '2010-03-01'
+        date = '2010-02-01'
     } else if (name === 'opportunity') {
         date = '2018-06-04'
     } else if (name === 'curiosity') {
