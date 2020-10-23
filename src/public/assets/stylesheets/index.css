@@ -45,9 +45,16 @@ main {
   cursor: pointer;
 }
 
-.rover-card:hover {
+.rover-card:hover,
+.rover-card:focus {
   opacity: 1;
   color: white;
+  outline: none;
+  border: 5px solid black;
+}
+
+.rover-card:focus {
+  
 }
 
 footer {

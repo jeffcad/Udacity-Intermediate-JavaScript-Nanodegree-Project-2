@@ -77,13 +77,13 @@ const RoverData = (state) => {
     if (!state.selectedRover) {
         return (`
             <div class="rover-container">
-                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[0]}'})">
+                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[0]}'})" tabindex="0">
                     <h2>${state.rovers[0]}</h2>
                 </div>
-                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[1]}'})">
+                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[1]}'})" tabindex="0">
                     <h2>${state.rovers[1]}</h2>
                 </div>
-                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[2]}'})">
+                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[2]}'})" tabindex="0">
                     <h2>${state.rovers[2]}</h2>
                 </div>
             </div >
