@@ -77,18 +77,22 @@ const RoverData = (state) => {
     if (!state.selectedRover) {
         return `
             <div class="rover-container">
-                <div class="rover-card"><h2>${store.rovers[0]}</h2></div>
-                <div class="rover-card"><h2>${store.rovers[1]}</h2></div>
-                <div class="rover-card"><h2>${store.rovers[2]}</h2></div>
+                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[0]}'})">
+                    <h2>${store.rovers[0]}</h2>
+                </div>
+                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[1]}'})">
+                    <h2>${store.rovers[1]}</h2>
+                </div>
+                <div class="rover-card" onclick="updateStore(store, {selectedRover: '${store.rovers[2]}'})">
+                    <h2>${store.rovers[2]}</h2>
+                </div>
             </div >
         `
     }
 
     if (!store.data) {
-        console.log('Getting API data')
-        console.log('Before getRoverData')
+        console.log(`Getting API data for ${state.selectedRover}`)
         getRoverData(store)
-        console.log('After getRoverData')
         return ""
     }
 
