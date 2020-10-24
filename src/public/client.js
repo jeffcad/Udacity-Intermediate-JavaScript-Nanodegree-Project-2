@@ -44,7 +44,7 @@ const RoverData = (state) => {
 
     if (!state.selectedRover) {
         return (`
-            ${wrapInDivFunction('rover-container', roverMapperFunction,
+            ${wrapInDivFunction('rover-container', joinMapperFunction,
             store.rovers, roverCardMakerFunction)}
         `)
     }
@@ -71,9 +71,8 @@ const RoverData = (state) => {
         <button onclick="updateStore(store, {selectedRover: '', data: ''})">
             Back
         </button>
-        <div class="photo-container">
-            ${photoURL.map(url => `<img class="photo" src="${url}" alt="Photo taken on Mars by ${name}"/>`).join('')}
-        </div>
+        ${wrapInDivFunction('photo-container', joinMapperFunction,
+        photoURL, photoElementMakerFunction)}
         <button onclick="updateStore(store, {selectedRover: '', data: ''})">
             Back
         </button>
@@ -81,6 +80,13 @@ const RoverData = (state) => {
 }
 
 // --------------- COMPONENT HELPER FUNCTIONS, INCLUDING HIGHER-ORDER
+
+const photoElementMakerFunction = (url) => {
+    return (`
+    <img class="photo" src="${url}" alt="Photo taken on Mars by 
+    ${store.selectedRover}"/>
+    `)
+}
 
 const roverCardMakerFunction = (rover) => {
     return (`
@@ -91,7 +97,7 @@ const roverCardMakerFunction = (rover) => {
     `)
 }
 
-const roverMapperFunction = (mapThis, elementMakerFunction) => {
+const joinMapperFunction = (mapThis, elementMakerFunction) => {
     return (`
         ${mapThis.map(x => elementMakerFunction(x)).join('')}
     `)
