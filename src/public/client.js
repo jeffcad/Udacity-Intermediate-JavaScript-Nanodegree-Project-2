@@ -82,7 +82,7 @@ const RoverData = (state) => {
             <li>Launched from Earth on: ${launch_date}</li>
             <li>Landed on Mars on: ${landing_date}</li>
             <li>Mission status: ${status}</li>
-            <li>Photos taken on Earth date: ${photoDate}</li>
+            <li>Photos taken on: ${photoDate}</li>
         </ul>
         <button onclick="updateStore(store, {selectedRover: '', data: ''})" class="back-button">Back</button>
         ${wrapInDivFunction('photo-container', joinMapperFunction,
