@@ -41,12 +41,12 @@ window.addEventListener('load', () => {
 
 const RoverData = (state) => {
 
-    // If no rover is selected in store, create the rover card HTML with 
+    // If no rover is selected in state, create the rover card HTML with 
     // wrapInDivFunction and return
     if (!state.selectedRover) {
         return (`
-            ${wrapInDivFunction('rover-container', joinMapperFunction,
-            store.rovers, roverCardMakerFunction)}
+            ${wrapInDivFunction(state, 'rover-container', joinMapperFunction,
+            state.rovers, roverCardMakerFunction)}
         `)
     }
 
@@ -84,7 +84,7 @@ const RoverData = (state) => {
             <li>Photos taken on: ${photoDate}</li>
         </ul>
         <button onclick="updateStore(store, {selectedRover: '', data: ''})" class="back-button">Back</button>
-        ${wrapInDivFunction('photo-container', joinMapperFunction,
+        ${wrapInDivFunction(state, 'photo-container', joinMapperFunction,
         photoURL, photoElementMakerFunction)}
         <button onclick="updateStore(store, {selectedRover: '', data: ''})" class="back-button">Back</button>
     `)
@@ -100,10 +100,10 @@ const RoverData = (state) => {
  * @param {Array} mapThis The array that will be mapped
  * @param {function} elementMakerFunction Function to create the element HTML
  */
-const wrapInDivFunction = (divClass, mapperFunction, mapThis, elementMakerFunction) => {
+const wrapInDivFunction = (state, divClass, mapperFunction, mapThis, elementMakerFunction) => {
     return (`
     <div class="${divClass}">
-        ${mapperFunction(mapThis, elementMakerFunction)}
+        ${mapperFunction(state, mapThis, elementMakerFunction)}
     </div >
     `)
 }
@@ -114,9 +114,9 @@ const wrapInDivFunction = (divClass, mapperFunction, mapThis, elementMakerFuncti
  * @param {Array} mapThis The array to be mapped and joined
  * @param {function} elementMakerFunction Function to use for mapping
  */
-const joinMapperFunction = (mapThis, elementMakerFunction) => {
+const joinMapperFunction = (state, mapThis, elementMakerFunction) => {
     return (`
-        ${mapThis.map(x => elementMakerFunction(x)).join('')}
+        ${mapThis.map(x => elementMakerFunction(state, x)).join('')}
     `)
 }
 
@@ -125,7 +125,7 @@ const joinMapperFunction = (mapThis, elementMakerFunction) => {
  * @param {string} rover Name of the rover
  * @returns Button HTML
  */
-const roverCardMakerFunction = (rover) => {
+const roverCardMakerFunction = (state, rover) => {
     return (`
     <button class="rover-card"
     onclick="setTimeout(updateStore, 1000, (store, {selectedRover: '${rover}'}))">
@@ -139,10 +139,10 @@ const roverCardMakerFunction = (rover) => {
  * @param {string} url URL of the photo
  * @returns Image tag HTML
  */
-const photoElementMakerFunction = (url) => {
+const photoElementMakerFunction = (state, url) => {
     return (`
     <img class="photo" src="${url}" alt="Photo taken on Mars by 
-    ${store.selectedRover}"/>
+    ${state.selectedRover}"/>
     `)
 }
 
