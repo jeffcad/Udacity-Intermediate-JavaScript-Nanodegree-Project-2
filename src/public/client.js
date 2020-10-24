@@ -152,7 +152,7 @@ const photoElementMakerFunction = (url) => {
 const getRoverData = (state) => {
     const { selectedRover } = state
 
-    fetch(`http://localhost:3000/${selectedRover}`)
+    fetch(`/${selectedRover}`)
         .then(res => res.json())
         .then(data => updateStore(state, { data }))
 }
