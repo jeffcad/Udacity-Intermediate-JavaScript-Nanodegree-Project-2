@@ -77,6 +77,15 @@ main {
   cursor: pointer;
   box-shadow: 10px 10px 10px #B7410E;
   font-family: 'Kufam', cursive;
+  opacity: 0.5;
+  transition: 1s;
+}
+
+.rover-card:hover,
+.rover-card:focus,
+.rover-card:active {
+  opacity: 1;
+  outline: none;
 }
 
 .card-title {
@@ -170,15 +179,6 @@ footer {
     width: 320px;
     height: 320px;
     margin: 30px;
-    opacity: 0.5;
-    transition: 1s;
-  }
-
-  .rover-card:hover,
-  .rover-card:focus,
-  .rover-card:active {
-    opacity: 1;
-    outline: none;
   }
   
   .photo {
