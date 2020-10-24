@@ -63,11 +63,13 @@ const RoverData = (state) => {
         state.data.results.photos[0].rover
 
     return (`
-        <p>Rover name: ${name}</p>
-        <p>Launched from Earth on: ${launch_date}</p>
-        <p>Landed on Mars on: ${landing_date}</p>
-        <p>Mission status: ${status}</p>
-        <p>Photos taken on Mars on Earth date: ${photoDate}
+        <ul class="info-container">
+            <li>Rover name: ${name}</li>
+            <li>Launched from Earth on: ${launch_date}</li>
+            <li>Landed on Mars on: ${landing_date}</li>
+            <li>Mission status: ${status}</li>
+            <li>Photos taken on Earth date: ${photoDate}</li>
+        </ul>
         <button onclick="updateStore(store, {selectedRover: '', data: ''})" class="back-button">Back</button>
         ${wrapInDivFunction('photo-container', joinMapperFunction,
         photoURL, photoElementMakerFunction)}

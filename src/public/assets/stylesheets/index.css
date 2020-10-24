@@ -9,7 +9,6 @@ h3 {
 }
 
 h1 {
-  color: #B7410E;
   font-size: 3rem;
   margin: 20px;
 }
@@ -19,15 +18,24 @@ h2 {
 }
 
 h3 {
-  color: #B7410E;
   font-size: 2rem;
   margin: 20px;
+}
+
+ul {
+  font-size: 2rem;
+  line-height: 2;
+  width: 80%;
+  margin: 0 auto;
+  list-style-type: disc;
 }
 
 body {
   font-family: Arial;
   min-height: 100vh;
   font-family: 'Kufam', cursive;
+  color: whitesmoke;
+  background-image: url("../images/starry-background.jpg");
 }
 
 #root {
@@ -60,7 +68,7 @@ main {
   background-image: url("../images/mars.jpg");
   background-position: center;
   background-size: contain;
-  opacity: 0.5;
+  color: whitesmoke;
   width: 300px;
   height: 300px;
   margin: 30px auto;
@@ -69,13 +77,7 @@ main {
   cursor: pointer;
   box-shadow: 10px 10px 10px #B7410E;
   font-family: 'Kufam', cursive;
-}
-
-.rover-card:hover,
-.rover-card:focus {
-  opacity: 1;
-  color: white;
-  outline: none;
+  background-color: red;
 }
 
 .card-title {
@@ -96,18 +98,19 @@ main {
 .back-button {
   display: block;
   background-color: #B7410E;
-  color: white;
-  padding: 5px;
-  margin: 20px;
+  color: whitesmoke;
+  padding: 5px 50px;
+  margin: 40px auto;
   border-radius: 5px;
+  font-size: 1.5rem;
   font-family: 'Kufam', cursive;
-  box-shadow: 3px 3px 3px #B7410E;
+  box-shadow: 0 0 30px whitesmoke;
   cursor: pointer;
 }
 
 .back-button:hover,
 .back-button:focus {
-  border: 2px solid black;
+  border: 2px solid whitesmoke;
   outline: none;
 }
 
@@ -154,6 +157,14 @@ footer {
     font-size: 2.5rem;
   }
 
+  h3 {
+    font-size: 3rem;
+  }
+
+  ul {
+    font-size: 3rem;
+  }
+
   .rover-container {
     flex-direction: row;
     justify-content: center;
@@ -163,6 +174,15 @@ footer {
     width: 320px;
     height: 320px;
     margin: 30px;
+    opacity: 0.5;
+    transition: 1s;
+  }
+
+  .rover-card:hover,
+  .rover-card:focus,
+  .rover-card:active {
+    opacity: 1;
+    outline: none;
   }
   
   .photo {
@@ -185,7 +205,11 @@ footer {
   }
 
   h3 {
-    font-size: 3rem;
+    font-size: 4rem;
+  }
+
+  ul {
+    font-size: 4rem;
   }
 
   .rover-card {
