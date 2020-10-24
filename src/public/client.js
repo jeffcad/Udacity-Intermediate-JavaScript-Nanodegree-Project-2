@@ -1,3 +1,4 @@
+// Main data storage object, uses Immutable for the rover list
 let store = {
     selectedRover: '',
     data: '',
@@ -9,7 +10,6 @@ const root = document.getElementById('root')
 
 const updateStore = (store, newState) => {
     store = Object.assign(store, newState)
-    console.log('Store updated')
     render(root, store)
 }
 
@@ -42,6 +42,8 @@ window.addEventListener('load', () => {
 
 const RoverData = (state) => {
 
+    // If no rover is selected in store, create the rover card HTML with 
+    // wrapInDivFunction and return
     if (!state.selectedRover) {
         return (`
             ${wrapInDivFunction('rover-container', joinMapperFunction,
@@ -49,19 +51,31 @@ const RoverData = (state) => {
         `)
     }
 
+    // If a rover is selected but there's no data yet, call the API with
+    // getRoverData and return
+    // getRoverData will call the updateStore function, which calls this
+    // function again, so returning immediately after prevents errors in
+    // console with undefined data
     if (!state.data) {
-        console.log(`Getting API data for ${state.selectedRover}`)
         getRoverData(state)
         return ""
     }
 
-    console.log('Data: ', state.data)
+    // Array of photos from the rover
     const { photos } = state.data.results
+
+    // Map the photo array to get the URLs of the photos
     const photoURL = photos.map(photo => photo.img_src)
+
+    // All photos will be from the same date, so use photo[0]
     const photoDate = state.data.results.photos[0].earth_date
+
+    // Get the required mission data
     const { name, launch_date, landing_date, status } =
         state.data.results.photos[0].rover
 
+    // Makes the information HTML and calls wrapInDivFunction to start the
+    // production of the photo array
     return (`
         <ul class="info-container">
             <li>Rover name: ${name}</li>
@@ -79,13 +93,39 @@ const RoverData = (state) => {
 
 // --------------- COMPONENT HELPER FUNCTIONS, INCLUDING HIGHER-ORDER FUNCTIONS
 
-const photoElementMakerFunction = (url) => {
+/**
+ * @description Higher-order function to wrap elements of mapped array in <div>
+ * In this project it is used to make containers for the rover cards and photos
+ * @param {string} divClass Name of the class that will be assigned to the <div>
+ * @param {function} mapperFunction Function that will do the mapping
+ * @param {Array} mapThis The array that will be mapped
+ * @param {function} elementMakerFunction Function to create the element HTML
+ */
+const wrapInDivFunction = (divClass, mapperFunction, mapThis, elementMakerFunction) => {
     return (`
-    <img class="photo" src="${url}" alt="Photo taken on Mars by 
-    ${store.selectedRover}"/>
+    <div class="${divClass}">
+        ${mapperFunction(mapThis, elementMakerFunction)}
+    </div >
     `)
 }
 
+/**
+ * @description Higher-order function to make a joined map
+ * In this project it is used to make arrays of rover cards and photos and join
+ * @param {Array} mapThis The array to be mapped and joined
+ * @param {function} elementMakerFunction Function to use for mapping
+ */
+const joinMapperFunction = (mapThis, elementMakerFunction) => {
+    return (`
+        ${mapThis.map(x => elementMakerFunction(x)).join('')}
+    `)
+}
+
+/**
+ * @description Makes button HTML for a rover card on main UI
+ * @param {string} rover Name of the rover
+ * @returns Button HTML
+ */
 const roverCardMakerFunction = (rover) => {
     return (`
     <button class="rover-card"
@@ -95,17 +135,15 @@ const roverCardMakerFunction = (rover) => {
     `)
 }
 
-const joinMapperFunction = (mapThis, elementMakerFunction) => {
+/**
+ * @description Makes image tag HTML for a photo URL
+ * @param {string} url URL of the photo
+ * @returns Image tag HTML
+ */
+const photoElementMakerFunction = (url) => {
     return (`
-        ${mapThis.map(x => elementMakerFunction(x)).join('')}
-    `)
-}
-
-const wrapInDivFunction = (divClass, mapperFunction, mapThis, elementMakerFunction) => {
-    return (`
-    <div class="${divClass}">
-        ${mapperFunction(mapThis, elementMakerFunction)}
-    </div >
+    <img class="photo" src="${url}" alt="Photo taken on Mars by 
+    ${store.selectedRover}"/>
     `)
 }
 

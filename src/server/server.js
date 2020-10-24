@@ -18,8 +18,12 @@ app.use('/', express.static(path.join(__dirname, '../public')))
 // API call
 
 app.get('/:name', async (req, res) => {
+
+    // Get the name of the rover from the parameters
     const name = req.params.name.toLowerCase()
 
+    // Assign a date with good photos for Spirit and Opportunity
+    // Curiosity is active, so uses yesterday's date
     let date
     if (name === 'spirit') {
         date = '2010-02-01'
