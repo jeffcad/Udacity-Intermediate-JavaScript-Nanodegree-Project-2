@@ -44,7 +44,8 @@ const RoverData = (state) => {
 
     if (!state.selectedRover) {
         return (`
-            ${wrapInDivFunction('rover-container', roverMapperFunction, roverButtonMakerFunction)}
+            ${wrapInDivFunction('rover-container', roverMapperFunction,
+            store.rovers, roverCardMakerFunction)}
         `)
     }
 
@@ -81,7 +82,7 @@ const RoverData = (state) => {
 
 // --------------- COMPONENT HELPER FUNCTIONS, INCLUDING HIGHER-ORDER
 
-const roverButtonMakerFunction = (rover) => {
+const roverCardMakerFunction = (rover) => {
     return (`
     <button class="rover-card"
     onclick="updateStore(store, {selectedRover: '${rover}'})">
@@ -90,16 +91,16 @@ const roverButtonMakerFunction = (rover) => {
     `)
 }
 
-const roverMapperFunction = (elementMakerFunction) => {
+const roverMapperFunction = (mapThis, elementMakerFunction) => {
     return (`
-        ${store.rovers.map(rover => elementMakerFunction(rover)).join('')}
+        ${mapThis.map(x => elementMakerFunction(x)).join('')}
     `)
 }
 
-const wrapInDivFunction = (divClass, mapperFunction, elementMakerFunction) => {
+const wrapInDivFunction = (divClass, mapperFunction, mapThis, elementMakerFunction) => {
     return (`
     <div class="${divClass}">
-        ${mapperFunction(elementMakerFunction)}
+        ${mapperFunction(mapThis, elementMakerFunction)}
     </div >
     `)
 }
