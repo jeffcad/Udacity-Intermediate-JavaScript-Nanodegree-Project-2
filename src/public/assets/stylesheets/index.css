@@ -77,7 +77,6 @@ main {
   cursor: pointer;
   box-shadow: 10px 10px 10px #B7410E;
   font-family: 'Kufam', cursive;
-  background-color: red;
 }
 
 .card-title {
@@ -93,6 +92,7 @@ main {
 .photo {
   width: 80%;
   margin: 30px auto;
+  border: 5px solid #B7410E;
 }
 
 .back-button {
