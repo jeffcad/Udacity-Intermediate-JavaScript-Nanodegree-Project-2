@@ -33,7 +33,6 @@ const App = (state) => {
     `
 }
 
-// listening for load event because page should load before any JS is called
 window.addEventListener('load', () => {
     render(root, store)
 })
@@ -58,21 +57,21 @@ const RoverData = (state) => {
     // console with undefined data
     if (!state.data) {
         getRoverData(state)
-        return ""
+        return ''
     }
 
     // Array of photos from the rover
-    const { photos } = state.data.results
+    const { latest_photos } = state.data.results
 
     // Map the photo array to get the URLs of the photos
-    const photoURL = photos.map(photo => photo.img_src)
+    const photoURL = latest_photos.map(photo => photo.img_src)
 
     // All photos will be from the same date, so use photo[0]
-    const photoDate = state.data.results.photos[0].earth_date
+    const photoDate = state.data.results.latest_photos[0].earth_date
 
     // Get the required mission data
     const { name, launch_date, landing_date, status } =
-        state.data.results.photos[0].rover
+        state.data.results.latest_photos[0].rover
 
     // Makes the information HTML and calls wrapInDivFunction to start the
     // production of the photo array
@@ -94,9 +93,9 @@ const RoverData = (state) => {
 // --------------- COMPONENT HELPER FUNCTIONS, INCLUDING HIGHER-ORDER FUNCTIONS
 
 /**
- * @description Higher-order function to wrap elements of mapped array in <div>
+ * @description Higher-order function to wrap elements of mapped array in a div
  * In this project it is used to make containers for the rover cards and photos
- * @param {string} divClass Name of the class that will be assigned to the <div>
+ * @param {string} divClass Name of the class that will be assigned to the div
  * @param {function} mapperFunction Function that will do the mapping
  * @param {Array} mapThis The array that will be mapped
  * @param {function} elementMakerFunction Function to create the element HTML

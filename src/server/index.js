@@ -22,24 +22,9 @@ app.get('/:name', async (req, res) => {
     // Get the name of the rover from the parameters
     const name = req.params.name.toLowerCase()
 
-    // Assign a date with good photos for Spirit and Opportunity
-    // Curiosity is active, so uses yesterday's date
-    let date
-    if (name === 'spirit') {
-        date = '2010-02-01'
-    } else if (name === 'opportunity') {
-        date = '2018-06-04'
-    } else if (name === 'curiosity') {
-        const d = new Date()
-        date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate() - 1}`
-    } else {
-        res.send('Invalid address. Choose /opportunity, /spirit or /curiosity')
-        return
-    }
-
     try {
         const results = await fetch(`
-            https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/photos?earth_date=${date}&api_key=${process.env.API_KEY}
+            https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/latest_photos?api_key=${process.env.API_KEY}
         `)
             .then(res => res.json())
         res.send({ results })
