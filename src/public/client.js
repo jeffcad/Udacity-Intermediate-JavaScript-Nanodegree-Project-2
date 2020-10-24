@@ -68,18 +68,14 @@ const RoverData = (state) => {
         <p>Landed on Mars on: ${landing_date}</p>
         <p>Mission status: ${status}</p>
         <p>Photos taken on Mars on Earth date: ${photoDate}
-        <button onclick="updateStore(store, {selectedRover: '', data: ''})">
-            Back
-        </button>
+        <button onclick="updateStore(store, {selectedRover: '', data: ''})" class="back-button">Back</button>
         ${wrapInDivFunction('photo-container', joinMapperFunction,
         photoURL, photoElementMakerFunction)}
-        <button onclick="updateStore(store, {selectedRover: '', data: ''})">
-            Back
-        </button>
+        <button onclick="updateStore(store, {selectedRover: '', data: ''})" class="back-button">Back</button>
     `)
 }
 
-// --------------- COMPONENT HELPER FUNCTIONS, INCLUDING HIGHER-ORDER
+// --------------- COMPONENT HELPER FUNCTIONS, INCLUDING HIGHER-ORDER FUNCTIONS
 
 const photoElementMakerFunction = (url) => {
     return (`

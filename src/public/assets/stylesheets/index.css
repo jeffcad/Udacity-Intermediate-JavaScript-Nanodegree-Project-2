@@ -5,31 +5,35 @@
 h1,
 h2,
 h3 {
-  font-weight: bold;
+  font-weight: 900;
 }
 
 h1 {
   color: #B7410E;
-  font-size: 5rem;
+  font-size: 3rem;
+  margin: 20px;
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 h3 {
   color: #B7410E;
   font-size: 2rem;
+  margin: 20px;
 }
 
 body {
   font-family: Arial;
   min-height: 100vh;
+  font-family: 'Kufam', cursive;
 }
 
 #root {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: stretch;
   min-height: 100vh;
 }
@@ -59,11 +63,12 @@ main {
   opacity: 0.5;
   width: 300px;
   height: 300px;
-  margin: 30px;
+  margin: 30px auto;
   text-align: center;
   border-radius: 20px;
   cursor: pointer;
   box-shadow: 10px 10px 10px #B7410E;
+  font-family: 'Kufam', cursive;
 }
 
 .rover-card:hover,
@@ -85,6 +90,25 @@ main {
 
 .photo {
   width: 80%;
+  margin: 30px auto;
+}
+
+.back-button {
+  display: block;
+  background-color: #B7410E;
+  color: white;
+  padding: 5px;
+  margin: 20px;
+  border-radius: 5px;
+  font-family: 'Kufam', cursive;
+  box-shadow: 3px 3px 3px #B7410E;
+  cursor: pointer;
+}
+
+.back-button:hover,
+.back-button:focus {
+  border: 2px solid black;
+  outline: none;
 }
 
 footer {
@@ -93,6 +117,14 @@ footer {
 
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
+  h1 {
+    font-size: 3.8rem;
+  }
+
+  h2 {
+    font-size: 4rem;
+  }
+
   .rover-card {
     width: 500px;
     height: 500px
@@ -113,6 +145,15 @@ footer {
 /* -------------------  DESKTOP  -------------------- */
 
 @media (min-width: 1224px) {
+
+  h1 {
+    font-size: 5rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
   .rover-container {
     flex-direction: row;
     justify-content: center;
@@ -121,12 +162,7 @@ footer {
   .rover-card {
     width: 320px;
     height: 320px;
-  }
-
-  .photo-container {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    margin: 30px;
   }
   
   .photo {
@@ -139,15 +175,23 @@ footer {
 /* -------------------  LARGE SCREENS  -------------- */
 
 @media (min-width: 1824px) {
+
+  h1 {
+    font-size: 7rem;
+  }
+
+  h2 {
+    font-size: 4rem;
+  }
+
+  h3 {
+    font-size: 3rem;
+  }
+
   .rover-card {
     width: 500px;
     height: 500px;
-  }
-
-  .photo-container {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    margin: 50px;
   }
   
   .photo {
