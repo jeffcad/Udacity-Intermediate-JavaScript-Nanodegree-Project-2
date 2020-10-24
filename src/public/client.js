@@ -8,7 +8,7 @@ let store = {
 // add our markup to the page
 const root = document.getElementById('root')
 
-const updateStore = (store, newState) => {
+const updateStore = (newState) => {
     store = Object.assign(store, newState)
     render(root, store)
 }
@@ -83,10 +83,10 @@ const RoverData = (state) => {
             <li>Mission status: ${status}</li>
             <li>Photos taken on: ${photoDate}</li>
         </ul>
-        <button onclick="updateStore(store, {selectedRover: '', data: ''})" class="back-button">Back</button>
+        <button onclick="updateStore({selectedRover: '', data: ''})" class="back-button">Back</button>
         ${wrapInDivFunction(state, 'photo-container', joinMapperFunction,
         photoURL, photoElementMakerFunction)}
-        <button onclick="updateStore(store, {selectedRover: '', data: ''})" class="back-button">Back</button>
+        <button onclick="updateStore({selectedRover: '', data: ''})" class="back-button">Back</button>
     `)
 }
 
@@ -128,7 +128,7 @@ const joinMapperFunction = (state, mapThis, elementMakerFunction) => {
 const roverCardMakerFunction = (state, rover) => {
     return (`
     <button class="rover-card"
-    onclick="setTimeout(updateStore, 1000, (store, {selectedRover: '${rover}'}))">
+    onclick="setTimeout(updateStore, 1000, ({selectedRover: '${rover}'}))">
     <h2 class="card-title">${rover}</h2>
     </button>
     `)
@@ -153,5 +153,5 @@ const getRoverData = (state) => {
 
     fetch(`/${selectedRover}`)
         .then(res => res.json())
-        .then(data => updateStore(state, { data }))
+        .then(data => updateStore({ data }))
 }
