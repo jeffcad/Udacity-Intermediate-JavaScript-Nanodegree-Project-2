@@ -68,7 +68,8 @@ main {
   align-items: center;
   background-image: url("../images/mars.jpg");
   background-position: center;
-  background-size: contain;
+  background-size: 0;
+  background-repeat: no-repeat;
   color: whitesmoke;
   width: 300px;
   height: 300px;
@@ -77,15 +78,21 @@ main {
   cursor: pointer;
   box-shadow: 10px 10px 10px #B7410E;
   font-family: 'Kufam', cursive;
-  opacity: 0.5;
-  transition: 1s;
+  opacity: 0.4;
+  transition: 3s;
+  background-color: black;
 }
 
 .rover-card:hover,
 .rover-card:focus,
 .rover-card:active {
+  background-size: 100%;
   opacity: 1;
   outline: none;
+}
+
+.card-title {
+  color: whitesmoke;
 }
 
 .photo-container {

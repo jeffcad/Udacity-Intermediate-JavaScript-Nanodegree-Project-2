@@ -128,7 +128,7 @@ const joinMapperFunction = (state, mapThis, elementMakerFunction) => {
 const roverCardMakerFunction = (state, rover) => {
     return (`
     <button class="rover-card"
-    onclick="setTimeout(updateStore, 1500, ({selectedRover: '${rover}'}))">
+    onclick="setTimeout(updateStore, 3000, ({selectedRover: '${rover}'}))">
     <h2 class="card-title">${rover}</h2>
     </button>
     `)
