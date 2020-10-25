@@ -61,17 +61,17 @@ const RoverData = (state) => {
     }
 
     // Array of photos from the rover
-    const { latest_photos } = state.data.results
+    const { photos } = state.data.results
 
     // Map the photo array to get the URLs of the photos
-    const photoURL = latest_photos.map(photo => photo.img_src)
+    const photoURL = photos.map(photo => photo.img_src)
 
     // All photos will be from the same date, so use photo[0]
-    const photoDate = state.data.results.latest_photos[0].earth_date
+    const photoDate = state.data.results.photos[0].earth_date
 
     // Get the required mission data
     const { name, launch_date, landing_date, status } =
-        state.data.results.latest_photos[0].rover
+        state.data.results.photos[0].rover
 
     // Makes the information HTML and calls wrapInDivFunction to start the
     // production of the photo array
@@ -128,7 +128,7 @@ const joinMapperFunction = (state, mapThis, elementMakerFunction) => {
 const roverCardMakerFunction = (state, rover) => {
     return (`
     <button class="rover-card"
-    onclick="setTimeout(updateStore, 1000, ({selectedRover: '${rover}'}))">
+    onclick="setTimeout(updateStore, 1500, ({selectedRover: '${rover}'}))">
     <h2 class="card-title">${rover}</h2>
     </button>
     `)
