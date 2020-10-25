@@ -104,7 +104,7 @@ main {
 .photo {
   width: 80%;
   margin: 30px auto;
-  border: 5px solid #B7410E;
+  border: 8px groove #B7410E;
 }
 
 .back-button {
