@@ -65,6 +65,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-image: url("../images/mars.jpg");
   background-position: center;
   background-size: contain;
@@ -72,7 +73,6 @@ main {
   width: 300px;
   height: 300px;
   margin: 30px auto;
-  text-align: center;
   border-radius: 20px;
   cursor: pointer;
   box-shadow: 10px 10px 10px #B7410E;
@@ -86,10 +86,6 @@ main {
 .rover-card:active {
   opacity: 1;
   outline: none;
-}
-
-.card-title {
-  margin: auto;
 }
 
 .photo-container {
