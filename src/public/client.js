@@ -9,7 +9,9 @@ let store = Immutable.Map({
 const root = document.getElementById('root')
 
 const updateStore = (property, value) => {
+    console.log('Before: ', store)
     store = store.set(property, value)
+    console.log('After: ', store)
     render(root, store)
 }
 
@@ -45,7 +47,6 @@ window.addEventListener('load', () => {
 // ------------------------------------------------------  COMPONENTS
 
 const RoverData = (state) => {
-    console.log(state)
 
     // If no rover is selected in state, create the rover card HTML with 
     // wrapInDivFunction and return
