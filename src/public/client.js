@@ -1,15 +1,20 @@
 // Main data storage object, uses Immutable for the rover list
-let store = {
+let store = Immutable.Map({
     selectedRover: '',
     data: '',
     rovers: Immutable.List(['Spirit', 'Opportunity', 'Curiosity']),
-}
+})
 
 // add our markup to the page
 const root = document.getElementById('root')
 
-const updateStore = (newState) => {
-    store = Object.assign(store, newState)
+const updateStore = (property, value) => {
+    store = store.set(property, value)
+    render(root, store)
+}
+
+const updateStoreBackButton = (property1, value1, property2, value2) => {
+    store = store.set(property1, value1).set(property2, value2)
     render(root, store)
 }
 
@@ -40,13 +45,14 @@ window.addEventListener('load', () => {
 // ------------------------------------------------------  COMPONENTS
 
 const RoverData = (state) => {
+    console.log(state)
 
     // If no rover is selected in state, create the rover card HTML with 
     // wrapInDivFunction and return
-    if (!state.selectedRover) {
+    if (!state.get('selectedRover')) {
         return (`
             ${wrapInDivFunction(state, 'rover-container', joinMapperFunction,
-            state.rovers, roverCardMakerFunction)}
+            state.get('rovers'), roverCardMakerFunction)}
         `)
     }
 
@@ -55,23 +61,22 @@ const RoverData = (state) => {
     // getRoverData will call the updateStore function, which calls this
     // function again, so returning immediately after prevents errors in
     // console with undefined data
-    if (!state.data) {
+    if (!state.get('data')) {
         getRoverData(state)
         return ''
     }
 
     // Array of photos from the rover
-    const { photos } = state.data.results
+    const { photos } = state.getIn(['data', 'results'])
 
     // Map the photo array to get the URLs of the photos
     const photoURL = photos.map(photo => photo.img_src)
 
     // All photos will be from the same date, so use photo[0]
-    const photoDate = state.data.results.photos[0].earth_date
+    const photoDate = photos[0].earth_date
 
     // Get the required mission data
-    const { name, launch_date, landing_date, status } =
-        state.data.results.photos[0].rover
+    const { name, launch_date, landing_date, status } = photos[0].rover
 
     // Makes the information HTML and calls wrapInDivFunction to start the
     // production of the photo array
@@ -83,10 +88,10 @@ const RoverData = (state) => {
             <li>Mission status: ${status}</li>
             <li>Photos taken on: ${photoDate}</li>
         </ul>
-        <button onclick="updateStore({selectedRover: '', data: ''})" class="back-button">Back</button>
+        <button onclick="updateStoreBackButton('selectedRover', '', 'data', '')" class="back-button">Back</button>
         ${wrapInDivFunction(state, 'photo-container', joinMapperFunction,
         photoURL, photoElementMakerFunction)}
-        <button onclick="updateStore({selectedRover: '', data: ''})" class="back-button">Back</button>
+        <button onclick="updateStoreBackButton('selectedRover', '', 'data', '')" class="back-button">Back</button>
     `)
 }
 
@@ -128,7 +133,7 @@ const joinMapperFunction = (state, mapThis, elementMakerFunction) => {
 const roverCardMakerFunction = (state, rover) => {
     return (`
     <button class="rover-card"
-    onclick="setTimeout(updateStore, 3000, ({selectedRover: '${rover}'}))">
+    onclick="updateStore('selectedRover', '${rover}')">
     <h2 class="card-title">${rover}</h2>
     </button>
     `)
@@ -142,16 +147,16 @@ const roverCardMakerFunction = (state, rover) => {
 const photoElementMakerFunction = (state, url) => {
     return (`
     <img class="photo" src="${url}" alt="Photo taken on Mars by 
-    ${state.selectedRover}"/>
+    ${state.get('selectedRover')}"/>
     `)
 }
 
 // ------------------------------------------------------  API CALLS
 
 const getRoverData = (state) => {
-    const { selectedRover } = state
+    const selectedRover = state.get('selectedRover')
 
     fetch(`/${selectedRover}`)
-        .then(res => res.json())
-        .then(data => updateStore({ data }))
+        .then(res => jsonData = res.json())
+        .then(data => updateStore('data', data))
 }
