@@ -25,22 +25,22 @@ app.get('/:name', async (req, res) => {
     // Assign a date with good photos for Spirit and Opportunity
     // Curiosity is active, so uses yesterday's date
     let date
+    let url
     if (name === 'spirit') {
         date = '2010-02-01'
+        url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/photos?earth_date=${date}&api_key=${process.env.API_KEY}`
     } else if (name === 'opportunity') {
         date = '2018-06-04'
+        url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/photos?earth_date=${date}&api_key=${process.env.API_KEY}`
     } else if (name === 'curiosity') {
-        const d = new Date()
-        date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate() - 1}`
+        url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/latest_photos?api_key=${process.env.API_KEY}`
     } else {
         res.send('Invalid address. Choose /opportunity, /spirit or /curiosity')
         return
     }
 
     try {
-        const results = await fetch(`
-            https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/photos?earth_date=${date}&api_key=${process.env.API_KEY}
-        `)
+        const results = await fetch(url)
             .then(res => res.json())
         res.send({ results })
     } catch (err) {
