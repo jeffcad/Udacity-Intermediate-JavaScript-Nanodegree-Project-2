@@ -61,17 +61,21 @@ const RoverData = (state) => {
     }
 
     // Array of photos from the rover
-    const { photos } = state.data.results
+    let photos
+    if (state.selectedRover === 'Curiosity') {
+        photos = state.data.results.latest_photos
+    } else {
+        photos = state.data.results.photos
+    }
 
     // Map the photo array to get the URLs of the photos
     const photoURL = photos.map(photo => photo.img_src)
 
     // All photos will be from the same date, so use photo[0]
-    const photoDate = state.data.results.photos[0].earth_date
+    const photoDate = photos[0].earth_date
 
     // Get the required mission data
-    const { name, launch_date, landing_date, status } =
-        state.data.results.photos[0].rover
+    const { name, launch_date, landing_date, status } = photos[0].rover
 
     // Makes the information HTML and calls wrapInDivFunction to start the
     // production of the photo array
